@@ -1,0 +1,37 @@
+새로 알게 된 점
+.toFixed(n) : n 만큼의 소숫점 자리 수만 나타나게 해준다
+
+까먹었다가 알게 된 점
+useEffect(() => {
+    fetch("https://api.coinpaprika.com/v1/tickers") // 정보 가져올 url
+    .then((response) => response.json()) // url에서 가져온 정보를 json으로 변환
+    .then((json) => { 
+      setCoins(json); // 변환된 json을 coins(빈 array)에 넣기
+      setLoading(false); // loading 글자 지우기
+    }
+    )
+  }, [])
+
+fetch는 url에서 정보를 가져오고 그 정보를 json() 형태로 변환
+ㄴ 이는 비동기 방식을 쓸 때 효과적이다
+
+어려운 부분
+
+{loading ?
+  <strong>Loading...</strong> : 
+  <select onChange={selectCoin}>
+    <option key="-1">
+      select coin
+    </option>
+  {coins.map((coin, index) =>
+    <option key={index} value={coin.quotes.USD.price}>
+      {coin.name}({coin.symbol}): ${(coin.quotes.USD.price).toFixed(2)}
+    </option>
+    )
+  }
+</select>
+}
+
+이 코드 부분이 너무 어렵업어ㅏㅕ 
+map, fetch, filter 얘네들을 더 공부해야겠다!
+  
